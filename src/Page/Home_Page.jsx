@@ -72,7 +72,7 @@ function Home_Page() {
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent"
             }}>
-              📊
+
             </div>
             <h3 style={{ 
               fontSize: "1.5rem",
@@ -135,7 +135,7 @@ function Home_Page() {
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent"
             }}>
-              ✂️
+
             </div>
             <h3 style={{ 
               fontSize: "1.5rem",
@@ -198,7 +198,7 @@ function Home_Page() {
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent"
             }}>
-              📐
+
             </div>
             <h3 style={{ 
               fontSize: "1.5rem",

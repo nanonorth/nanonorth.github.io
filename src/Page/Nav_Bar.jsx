@@ -70,29 +70,6 @@ export default function Nav_bar() {
           >
             Home
           </Button>
-          
-          <Button
-            component={Link}
-            to="/Bisection"
-            sx={{
-              color: "#E8E8E8",
-              fontSize: "16px",
-              fontWeight: "500",
-              textTransform: "none",
-              padding: "8px 20px",
-              borderRadius: "8px",
-              border: "1px solid transparent",
-              transition: "all 0.3s ease",
-              "&:hover": {
-                backgroundColor: "rgba(255, 215, 0, 0.15)",
-                borderColor: "#FFD700",
-                color: "#FFD700",
-                boxShadow: "0 0 12px rgba(255, 215, 0, 0.3)"
-              }
-            }}
-          >
-            Bisection
-          </Button>
 
           <Button
             component={Link}
@@ -115,6 +92,29 @@ export default function Nav_bar() {
             }}
           >
             Graphical
+          </Button>
+
+          <Button
+            component={Link}
+            to="/Bisection"
+            sx={{
+              color: "#E8E8E8",
+              fontSize: "16px",
+              fontWeight: "500",
+              textTransform: "none",
+              padding: "8px 20px",
+              borderRadius: "8px",
+              border: "1px solid transparent",
+              transition: "all 0.3s ease",
+              "&:hover": {
+                backgroundColor: "rgba(255, 215, 0, 0.15)",
+                borderColor: "#FFD700",
+                color: "#FFD700",
+                boxShadow: "0 0 12px rgba(255, 215, 0, 0.3)"
+              }
+            }}
+          >
+            Bisection
           </Button>
 
           <Button
