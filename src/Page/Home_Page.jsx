@@ -37,7 +37,7 @@ function Home_Page() {
           display: "grid",
           gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
           gap: "30px",
-          maxWidth: "900px",
+          maxWidth: "1200px",
           margin: "0 auto"
         }}>
           {/* Graphical Method Card */}
@@ -228,7 +228,262 @@ function Home_Page() {
               เริ่มต้น →
             </div>
           </Link>
+
+          {/* One-point Iteration Card */}
+          <Link
+            to="/OnePoint"
+            style={{
+              display: "block",
+              padding: "30px 30px",
+              background: "linear-gradient(135deg, #2A2B35 0%, #1E1F27 100%)",
+              border: "2px solid #3A3B45",
+              borderRadius: "16px",
+              textDecoration: "none",
+              transition: "all 0.3s ease",
+              position: "relative",
+              overflow: "hidden"
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = "translateY(-8px)";
+              e.currentTarget.style.borderColor = "#FFD700";
+              e.currentTarget.style.boxShadow = "0 12px 24px rgba(255, 215, 0, 0.3)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = "translateY(0)";
+              e.currentTarget.style.borderColor = "#3A3B45";
+              e.currentTarget.style.boxShadow = "none";
+            }}
+          >
+            <div style={{
+              fontSize: "3rem",
+              marginBottom: "15px",
+              background: "linear-gradient(135deg, #FFD700 0%, #FFA500 100%)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent"
+            }}>
+
+            </div>
+            <h3 style={{ 
+              fontSize: "1.5rem",
+              color: "#E8E8E8",
+              marginBottom: "10px",
+              fontWeight: "600"
+            }}>
+              One-point Iteration Method
+            </h3>
+            <p style={{ 
+              fontSize: "0.95rem",
+              color: "#A0A0A0",
+              lineHeight: "1.6",
+              marginBottom: "20px"
+            }}>
+              วิธีการวนซ้ำจุดเดียว
+            </p>
+            <div style={{
+              display: "inline-block",
+              padding: "10px 24px",
+              background: "linear-gradient(135deg, #FFD700 0%, #FFA500 100%)",
+              color: "#1E1F27",
+              borderRadius: "8px",
+              fontSize: "0.95rem",
+              fontWeight: "600"
+            }}>
+              เริ่มต้น →
+            </div>
+          </Link>
+
+          {/* Taylor Iteration Card */}
+          <Link
+            to="/Taylor"
+            style={{
+              display: "block",
+              padding: "30px 30px",
+              background: "linear-gradient(135deg, #2A2B35 0%, #1E1F27 100%)",
+              border: "2px solid #3A3B45",
+              borderRadius: "16px",
+              textDecoration: "none",
+              transition: "all 0.3s ease",
+              position: "relative",
+              overflow: "hidden"
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = "translateY(-8px)";
+              e.currentTarget.style.borderColor = "#FFD700";
+              e.currentTarget.style.boxShadow = "0 12px 24px rgba(255, 215, 0, 0.3)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = "translateY(0)";
+              e.currentTarget.style.borderColor = "#3A3B45";
+              e.currentTarget.style.boxShadow = "none";
+            }}
+          >
+            <div style={{
+              fontSize: "3rem",
+              marginBottom: "15px",
+              background: "linear-gradient(135deg, #FFD700 0%, #FFA500 100%)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent"
+            }}>
+
+            </div>
+            <h3 style={{ 
+              fontSize: "1.5rem",
+              color: "#E8E8E8",
+              marginBottom: "10px",
+              fontWeight: "600"
+            }}>
+              Taylor Series Method
+            </h3>
+            <p style={{ 
+              fontSize: "0.95rem",
+              color: "#A0A0A0",
+              lineHeight: "1.6",
+              marginBottom: "20px"
+            }}>
+              วิธีการประมาณค่า f(x) ด้วยอนุกรมเทเลอร์
+            </p>
+            <div style={{
+              display: "inline-block",
+              padding: "10px 24px",
+              background: "linear-gradient(135deg, #FFD700 0%, #FFA500 100%)",
+              color: "#1E1F27",
+              borderRadius: "8px",
+              fontSize: "0.95rem",
+              fontWeight: "600"
+            }}>
+              เริ่มต้น →
+            </div>
+          </Link>
+
+          {/* Newton Iteration Card */}
+          <Link
+            to="/NewtonRaphson"
+            style={{
+              display: "block",
+              padding: "30px 30px",
+              background: "linear-gradient(135deg, #2A2B35 0%, #1E1F27 100%)",
+              border: "2px solid #3A3B45",
+              borderRadius: "16px",
+              textDecoration: "none",
+              transition: "all 0.3s ease",
+              position: "relative",
+              overflow: "hidden"
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = "translateY(-8px)";
+              e.currentTarget.style.borderColor = "#FFD700";
+              e.currentTarget.style.boxShadow = "0 12px 24px rgba(255, 215, 0, 0.3)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = "translateY(0)";
+              e.currentTarget.style.borderColor = "#3A3B45";
+              e.currentTarget.style.boxShadow = "none";
+            }}
+          >
+            <div style={{
+              fontSize: "3rem",
+              marginBottom: "15px",
+              background: "linear-gradient(135deg, #FFD700 0%, #FFA500 100%)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent"
+            }}>
+
+            </div>
+            <h3 style={{ 
+              fontSize: "1.5rem",
+              color: "#E8E8E8",
+              marginBottom: "10px",
+              fontWeight: "600"
+            }}>
+              Newton Raphson Method
+            </h3>
+            <p style={{ 
+              fontSize: "0.95rem",
+              color: "#A0A0A0",
+              lineHeight: "1.6",
+              marginBottom: "20px"
+            }}>
+              วิธีการหาค่ารากโดยใช้อนุพันธ์อันดับหนึ่ง
+            </p>
+            <div style={{
+              display: "inline-block",
+              padding: "10px 24px",
+              background: "linear-gradient(135deg, #FFD700 0%, #FFA500 100%)",
+              color: "#1E1F27",
+              borderRadius: "8px",
+              fontSize: "0.95rem",
+              fontWeight: "600"
+            }}>
+              เริ่มต้น →
+            </div>
+          </Link>
+
+          {/* Secant Iteration Card */}
+          <Link
+            to="/Secant"
+            style={{
+              display: "block",
+              padding: "30px 30px",
+              background: "linear-gradient(135deg, #2A2B35 0%, #1E1F27 100%)",
+              border: "2px solid #3A3B45",
+              borderRadius: "16px",
+              textDecoration: "none",
+              transition: "all 0.3s ease",
+              position: "relative",
+              overflow: "hidden"
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = "translateY(-8px)";
+              e.currentTarget.style.borderColor = "#FFD700";
+              e.currentTarget.style.boxShadow = "0 12px 24px rgba(255, 215, 0, 0.3)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = "translateY(0)";
+              e.currentTarget.style.borderColor = "#3A3B45";
+              e.currentTarget.style.boxShadow = "none";
+            }}
+          >
+            <div style={{
+              fontSize: "3rem",
+              marginBottom: "15px",
+              background: "linear-gradient(135deg, #FFD700 0%, #FFA500 100%)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent"
+            }}>
+
+            </div>
+            <h3 style={{ 
+              fontSize: "1.5rem",
+              color: "#E8E8E8",
+              marginBottom: "10px",
+              fontWeight: "600"
+            }}>
+              Secant Method
+            </h3>
+            <p style={{ 
+              fontSize: "0.95rem",
+              color: "#A0A0A0",
+              lineHeight: "1.6",
+              marginBottom: "20px"
+            }}>
+              วิธีการหาค่ารากโดยใช้เส้นตัด
+            </p>
+            <div style={{
+              display: "inline-block",
+              padding: "10px 24px",
+              background: "linear-gradient(135deg, #FFD700 0%, #FFA500 100%)",
+              color: "#1E1F27",
+              borderRadius: "8px",
+              fontSize: "0.95rem",
+              fontWeight: "600"
+            }}>
+              เริ่มต้น →
+            </div>
+          </Link>
+
+
         </div>
+
 
         <div style={{
           marginTop: "80px",

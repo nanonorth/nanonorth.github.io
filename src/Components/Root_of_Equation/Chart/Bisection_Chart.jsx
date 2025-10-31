@@ -14,7 +14,6 @@ import {
 function BisectionGraph({ equation, iterations, XL, XR }) {
   const [selectedPoint, setSelectedPoint] = useState(null);
 
-  // ฟังก์ชันประเมินค่า
   const f = (x) => {
     try {
       return new Function("x", `return ${equation}`)(x);
@@ -27,26 +26,22 @@ function BisectionGraph({ equation, iterations, XL, XR }) {
   const xrValue = parseFloat(XR);
   const latestXM = iterations.length > 0 ? parseFloat(iterations[iterations.length - 1].xm) : null;
 
-  // คำนวณค่า y สำหรับแต่ละจุด
   const xlY = f(xlValue);
   const xrY = f(xrValue);
   const xmY = latestXM ? f(latestXM) : null;
 
-  // สร้าง graph ของฟังก์ชัน - ปรับให้ทำงานได้ดีกับทุกช่วง
   const generateFunctionData = () => {
     const data = [];
     
-    // หา root โดยประมาณเพื่อกำหนดช่วงที่เหมาะสม
     const estimatedRoot = latestXM || (xlValue + xrValue) / 2;
     const range = Math.abs(xrValue - xlValue);
     
-    // ถ้าช่วงกว้างมาก ให้โฟกัสที่บริเวณ root
     let minX, maxX;
     if (range > 100) {
-      const focusRange = Math.max(range * 0.15, 100); // โฟกัส 15% หรืออย่างน้อย 100 หน่วย
+      const focusRange = Math.max(range * 0.15, 100);
       minX = estimatedRoot - focusRange;
       maxX = estimatedRoot + focusRange;
-      // แต่ต้องรวม XL และ XR ด้วย
+
       minX = Math.min(minX, xlValue - focusRange * 0.1);
       maxX = Math.max(maxX, xrValue + focusRange * 0.1);
     } else {
@@ -69,7 +64,6 @@ function BisectionGraph({ equation, iterations, XL, XR }) {
 
   const functionData = generateFunctionData();
 
-  // คำนวณ domain สำหรับ Y axis ให้เหมาะสม
   const calculateYDomain = () => {
     if (functionData.length === 0) return ['auto', 'auto'];
     
@@ -183,7 +177,6 @@ function BisectionGraph({ equation, iterations, XL, XR }) {
             labelFormatter={(value) => `x = ${value?.toFixed(6)}`}
           />
 
-          {/* เส้นฟังก์ชัน */}
           <Line
             type="monotone"
             dataKey="y"
@@ -193,7 +186,6 @@ function BisectionGraph({ equation, iterations, XL, XR }) {
             strokeWidth={4}
           />
 
-          {/* เส้น y = 0 */}
           <ReferenceLine
             y={0}
             stroke="#FFD700"
@@ -202,7 +194,6 @@ function BisectionGraph({ equation, iterations, XL, XR }) {
             opacity={0.6}
           />
 
-          {/* เส้น XL (แดง) - แสดงเฉพาะเมื่ออยู่ในช่วงที่มองเห็น */}
           {functionData.length > 0 && 
            xlValue >= functionData[0].x && 
            xlValue <= functionData[functionData.length - 1].x && (
@@ -223,7 +214,6 @@ function BisectionGraph({ equation, iterations, XL, XR }) {
             />
           )}
 
-          {/* เส้น XR (เขียว) - แสดงเฉพาะเมื่ออยู่ในช่วงที่มองเห็น */}
           {functionData.length > 0 && 
            xrValue >= functionData[0].x && 
            xrValue <= functionData[functionData.length - 1].x && (
@@ -244,7 +234,6 @@ function BisectionGraph({ equation, iterations, XL, XR }) {
             />
           )}
 
-          {/* label XM */}
           {latestXM && (
             <ReferenceLine
               x={latestXM}
@@ -260,7 +249,6 @@ function BisectionGraph({ equation, iterations, XL, XR }) {
             />
           )}
 
-          {/* จุด XL (แดง) - แสดงเฉพาะเมื่ออยู่ในช่วงที่มองเห็น */}
           {functionData.length > 0 && 
            xlValue >= functionData[0].x && 
            xlValue <= functionData[functionData.length - 1].x && (
@@ -277,7 +265,6 @@ function BisectionGraph({ equation, iterations, XL, XR }) {
             />
           )}
 
-          {/* จุด XR (เขียว) - แสดงเฉพาะเมื่ออยู่ในช่วงที่มองเห็น */}
           {functionData.length > 0 && 
            xrValue >= functionData[0].x && 
            xrValue <= functionData[functionData.length - 1].x && (
@@ -294,7 +281,6 @@ function BisectionGraph({ equation, iterations, XL, XR }) {
             />
           )}
 
-          {/* จุด XM (ทอง) */}
           {latestXM && xmY !== null && (
             <ReferenceDot
               x={latestXM}

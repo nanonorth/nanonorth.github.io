@@ -11,12 +11,12 @@ import {
   ReferenceDot,
 } from "recharts";
 
-function GraphicalChart({ equation, XL, XR, rootResult }) {
+function NewtonRaphsonChart({ equation, iterations, rootResult }) {
   const [selectedPoint, setSelectedPoint] = useState(null);
 
+  // ฟังก์ชันประเมินค่า
   const f = (x) => {
     try {
-
       const cleanEquation = equation.replace(/\^/g, "**");
       return new Function("x", `return ${cleanEquation}`)(x);
     } catch (err) {
@@ -25,32 +25,32 @@ function GraphicalChart({ equation, XL, XR, rootResult }) {
     }
   };
 
-  const xlValue = parseFloat(XL);
-  const xrValue = parseFloat(XR);
-  const rootX = rootResult ? parseFloat(rootResult.x) : null;
-  const rootY = rootResult ? parseFloat(rootResult.y) : null;
+  // คำนวณช่วงสำหรับกราฟ
+  const calculateRange = () => {
+    const xValues = iterations.map(it => it.x);
+    const minX = Math.min(...xValues);
+    const maxX = Math.max(...xValues);
+    const range = maxX - minX;
+    const padding = Math.max(range * 0.3, 2);
+    
+    return {
+      xMin: minX - padding,
+      xMax: maxX + padding
+    };
+  };
 
+  const { xMin, xMax } = calculateRange();
+
+  // สร้าง graph ของฟังก์ชัน
   const generateFunctionData = () => {
     const data = [];
-    const range = Math.abs(xrValue - xlValue);
-    
-    let numPoints = 500;
-    if (range > 1000) numPoints = 800;
-    else if (range > 100) numPoints = 600;
-    
-    const step = (xrValue - xlValue) / numPoints;
+    const numPoints = 500;
+    const step = (xMax - xMin) / numPoints;
 
-    for (let x = xlValue; x <= xrValue; x += step) {
+    for (let x = xMin; x <= xMax; x += step) {
       const y = f(x);
       if (!isNaN(y) && isFinite(y)) {
         data.push({ x, y });
-      }
-    }
-    
-    if (data.length > 0 && data[data.length - 1].x < xrValue) {
-      const y = f(xrValue);
-      if (!isNaN(y) && isFinite(y)) {
-        data.push({ x: xrValue, y });
       }
     }
     
@@ -59,6 +59,7 @@ function GraphicalChart({ equation, XL, XR, rootResult }) {
 
   const functionData = generateFunctionData();
 
+  // คำนวณ domain สำหรับ Y axis
   const calculateYDomain = () => {
     if (functionData.length === 0) return ['auto', 'auto'];
     
@@ -84,15 +85,15 @@ function GraphicalChart({ equation, XL, XR, rootResult }) {
         <circle
           cx={cx}
           cy={cy}
-          r={10}
+          r={8}
           fill={fill}
           stroke="#1E1F27"
-          strokeWidth={3}
+          strokeWidth={2}
         />
         <circle
           cx={cx}
           cy={cy}
-          r={12}
+          r={10}
           fill="transparent"
           stroke={fill}
           strokeWidth={2}
@@ -177,7 +178,7 @@ function GraphicalChart({ equation, XL, XR, rootResult }) {
           <Tooltip
             contentStyle={{
               backgroundColor: "#1E1F27",
-              border: "2px solid #FFD700",
+              border: "2px solid #667eea",
               borderRadius: "8px",
               color: "#E8E8E8",
             }}
@@ -185,6 +186,7 @@ function GraphicalChart({ equation, XL, XR, rootResult }) {
             labelFormatter={(value) => `x = ${value.toFixed(6)}`}
           />
 
+          {/* เส้นฟังก์ชัน */}
           <Line
             type="monotone"
             dataKey="y"
@@ -194,6 +196,7 @@ function GraphicalChart({ equation, XL, XR, rootResult }) {
             strokeWidth={4}
           />
 
+          {/* เส้น y = 0 */}
           <ReferenceLine
             y={0}
             stroke="#FFD700"
@@ -202,12 +205,42 @@ function GraphicalChart({ equation, XL, XR, rootResult }) {
             opacity={0.6}
           />
 
-          {rootX !== null && (
+          {/* จุด iterations */}
+          {iterations.map((iter, idx) => (
+            <ReferenceDot
+              key={idx}
+              x={iter.x}
+              y={iter.fx}
+              r={6}
+              fill={idx === iterations.length - 1 ? "#FFD700" : "#667eea"}
+              stroke="#1E1F27"
+              strokeWidth={2}
+              onClick={() => setSelectedPoint({ 
+                label: `Iteration ${iter.iteration}`, 
+                x: iter.x, 
+                y: iter.fx, 
+                color: idx === iterations.length - 1 ? "#FFD700" : "#667eea"
+              })}
+              style={{ cursor: 'pointer' }}
+              shape={<CustomDot 
+                fill={idx === iterations.length - 1 ? "#FFD700" : "#667eea"}
+                onClick={() => setSelectedPoint({ 
+                  label: `Iteration ${iter.iteration}`, 
+                  x: iter.x, 
+                  y: iter.fx, 
+                  color: idx === iterations.length - 1 ? "#FFD700" : "#667eea"
+                })} 
+              />}
+            />
+          ))}
+
+          {/* Label Root */}
+          {rootResult && (
             <ReferenceLine
-              x={rootX}
+              x={rootResult.x}
               stroke="transparent"
               label={{
-                value: `Root = ${rootX.toFixed(6)}`,
+                value: `Root = ${rootResult.x.toFixed(6)}`,
                 position: "insideTopLeft",
                 fill: "#FFD700",
                 fontSize: 13,
@@ -216,77 +249,12 @@ function GraphicalChart({ equation, XL, XR, rootResult }) {
               }}
             />
           )}
-
-          {rootX !== null && rootY !== null && (
-            <ReferenceDot
-              x={rootX}
-              y={rootY}
-              r={10}
-              fill="#FFD700"
-              stroke="#1E1F27"
-              strokeWidth={3}
-              onClick={() => setSelectedPoint({ 
-                label: 'Root', 
-                x: rootX, 
-                y: rootY, 
-                color: '#FFD700' 
-              })}
-              style={{ cursor: 'pointer' }}
-              shape={<CustomDot 
-                fill="#FFD700" 
-                onClick={() => setSelectedPoint({ 
-                  label: 'Root', 
-                  x: rootX, 
-                  y: rootY, 
-                  color: '#FFD700' 
-                })} 
-              />}
-            />
-          )}
         </LineChart>
       </ResponsiveContainer>
 
-      <div style={{
-        marginTop: "20px",
-        padding: "15px",
-        backgroundColor: "#1E1F27",
-        borderRadius: "8px",
-        border: "1px solid #3A3B45",
-        display: "grid",
-        gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))",
-        gap: "15px"
-      }}>
-        <div>
-          <div style={{ color: "#B8B8B8", fontSize: "0.85rem" }}>ช่วงการค้นหา</div>
-          <div style={{ color: "#E8E8E8", fontSize: "0.95rem", fontWeight: "600", marginTop: "4px" }}>
-            [{xlValue.toFixed(2)}, {xrValue.toFixed(2)}]
-          </div>
-        </div>
-        <div>
-          <div style={{ color: "#B8B8B8", fontSize: "0.85rem" }}>ความกว้างช่วง</div>
-          <div style={{ color: "#E8E8E8", fontSize: "0.95rem", fontWeight: "600", marginTop: "4px" }}>
-            {(xrValue - xlValue).toFixed(4)}
-          </div>
-        </div>
-        {rootX !== null && (
-          <>
-            <div>
-              <div style={{ color: "#B8B8B8", fontSize: "0.85rem" }}>ค่าราก (Root)</div>
-              <div style={{ color: "#FFD700", fontSize: "0.95rem", fontWeight: "600", marginTop: "4px" }}>
-                {rootX.toFixed(6)}
-              </div>
-            </div>
-            <div>
-              <div style={{ color: "#B8B8B8", fontSize: "0.85rem" }}>f(Root)</div>
-              <div style={{ color: "#FFA500", fontSize: "0.95rem", fontWeight: "600", marginTop: "4px" }}>
-                {rootY.toFixed(6)}
-              </div>
-            </div>
-          </>
-        )}
-      </div>
+      
     </div>
   );
 }
 
-export default GraphicalChart;
+export default NewtonRaphsonChart;

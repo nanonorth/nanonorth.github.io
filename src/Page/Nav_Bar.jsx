@@ -140,6 +140,98 @@ export default function Nav_bar() {
             False Position
           </Button>
 
+          <Button
+            component={Link}
+            to="/OnePoint"
+            sx={{
+              color: "#E8E8E8",
+              fontSize: "16px",
+              fontWeight: "500",
+              textTransform: "none",
+              padding: "8px 20px",
+              borderRadius: "8px",
+              border: "1px solid transparent",
+              transition: "all 0.3s ease",
+              "&:hover": {
+                backgroundColor: "rgba(255, 215, 0, 0.15)",
+                borderColor: "#FFD700",
+                color: "#FFD700",
+                boxShadow: "0 0 12px rgba(255, 215, 0, 0.3)"
+              }
+            }}
+          >
+            One-Point
+          </Button>
+
+          <Button
+            component={Link}
+            to="/Taylor"
+            sx={{
+              color: "#E8E8E8",
+              fontSize: "16px",
+              fontWeight: "500",
+              textTransform: "none",
+              padding: "8px 20px",
+              borderRadius: "8px",
+              border: "1px solid transparent",
+              transition: "all 0.3s ease",
+              "&:hover": {
+                backgroundColor: "rgba(255, 215, 0, 0.15)",
+                borderColor: "#FFD700",
+                color: "#FFD700",
+                boxShadow: "0 0 12px rgba(255, 215, 0, 0.3)"
+              }
+            }}
+          >
+            Taylor Series
+          </Button>
+
+          <Button
+            component={Link}
+            to="/NewtonRaphson"
+            sx={{
+              color: "#E8E8E8",
+              fontSize: "16px",
+              fontWeight: "500",
+              textTransform: "none",
+              padding: "8px 20px",
+              borderRadius: "8px",
+              border: "1px solid transparent",
+              transition: "all 0.3s ease",
+              "&:hover": {
+                backgroundColor: "rgba(255, 215, 0, 0.15)",
+                borderColor: "#FFD700",
+                color: "#FFD700",
+                boxShadow: "0 0 12px rgba(255, 215, 0, 0.3)"
+              }
+            }}
+          >
+            Newton Raphson
+          </Button>
+
+          <Button
+            component={Link}
+            to="/Secant"
+            sx={{
+              color: "#E8E8E8",
+              fontSize: "16px",
+              fontWeight: "500",
+              textTransform: "none",
+              padding: "8px 20px",
+              borderRadius: "8px",
+              border: "1px solid transparent",
+              transition: "all 0.3s ease",
+              "&:hover": {
+                backgroundColor: "rgba(255, 215, 0, 0.15)",
+                borderColor: "#FFD700",
+                color: "#FFD700",
+                boxShadow: "0 0 12px rgba(255, 215, 0, 0.3)"
+              }
+            }}
+          >
+            Secant
+          </Button>
+
         </Box>
       </Toolbar>
     </AppBar>
